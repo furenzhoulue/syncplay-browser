@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SyncPlay Lite</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header>
+      <h1>SyncPlay Lite</h1>
+      <span id="status" class="badge">disconnected</span>
+    </header>
+
+    <label for="serverUrl">Relay server</label>
+    <input id="serverUrl" type="text" spellcheck="false" autocomplete="off" />
+
+    <div class="row">
+      <div>
+        <label for="room">Room code</label>
+        <input id="room" type="text" spellcheck="false" autocomplete="off" />
+      </div>
+      <div>
+        <label for="user">Your name</label>
+        <input id="user" type="text" spellcheck="false" autocomplete="off" />
+      </div>
+    </div>
+
+    <div class="buttons">
+      <button id="connect" class="primary" type="button">Connect</button>
+      <button id="disconnect" type="button">Disconnect</button>
+    </div>
+
+    <div class="section">
+      <div class="section-head">
+        <strong>Room</strong>
+        <span id="roomInfo" class="muted">—</span>
+      </div>
+      <ul id="users" class="users"><li class="muted">No one yet</li></ul>
+    </div>
+
+    <button id="resync" type="button" class="wide">↻ Resync to me</button>
+
+    <div id="diagnostics" class="diagnostics muted"></div>
+    <p id="error" class="error" hidden></p>
+
+    <script src="../shared/protocol.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>

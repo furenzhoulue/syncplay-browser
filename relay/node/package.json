@@ -1,0 +1,17 @@
+{
+  "name": "syncplay-relay-node",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Tiny local WebSocket relay for SyncPlay Lite (testing only)",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test-client.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}

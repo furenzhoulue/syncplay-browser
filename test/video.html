@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>SyncPlay test video</title>
+    <style>
+      body { font-family: system-ui, sans-serif; margin: 2rem; }
+      video { width: min(720px, 100%); background: #000; }
+      button { padding: .5rem .8rem; margin-right: .5rem; }
+    </style>
+  </head>
+  <body>
+    <h1>SyncPlay Lite test page</h1>
+    <p>Open this page in two Firefox profiles, join the same room, then play/pause/seek.</p>
+    <div id="player"></div>
+    <p>
+      <button id="replace" type="button">Replace &lt;video&gt; element</button>
+      <span id="note">Use this to test the MutationObserver re-attach.</span>
+    </p>
+    <iframe title="test iframe" srcdoc="<video controls src='https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4' style='width:320px'></video>" style="width:360px;height:240px"></iframe>
+
+    <script>
+      const SRC = "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4";
+      function mount() {
+        const old = document.querySelector("video");
+        const t = old ? old.currentTime : 0;
+        const paused = old ? old.paused : true;
+        const video = document.createElement("video");
+        video.controls = true;
+        video.src = SRC;
+        if (t > 0) {
+          video.addEventListener("loadedmetadata", () => { video.currentTime = t; }, { once: true });
+        }
+        document.getElementById("player").replaceChildren(video);
+        if (!paused) video.play().catch(() => {});
+      }
+      mount();
+      document.getElementById("replace").addEventListener("click", () => {
+        mount();
+        document.getElementById("note").textContent = "Replaced — extension should re-attach automatically.";
+      });
+    </script>
+  </body>
+</html>
